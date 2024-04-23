@@ -4,61 +4,63 @@ services:
     image: openarmor/openarmor-indexer:latest
     container_name: openarmor-node1
     environment:
-      - cluster.name=openarmor-cluster # Name the cluster
-      - node.name=openarmor-node1 # Name the node that will run in this container
-      - discovery.seed_hosts=openarmor-node1,openarmor-node2 # Nodes to look for when discovering the cluster
-      - cluster.initial_cluster_manager_nodes=openarmor-node1,openarmor-node2 # Nodes eligibile to serve as cluster manager
-      - bootstrap.memory_lock=true # Disable JVM heap memory swapping
-      - "OPENSEARCH_JAVA_OPTS=-Xms512m -Xmx512m" # Set min and max JVM heap sizes to at least 50% of system RAM
-      - "DISABLE_INSTALL_DEMO_CONFIG=true" # Prevents execution of bundled demo script which installs demo certificates and security configurations to openarmor
-      - "DISABLE_SECURITY_PLUGIN=true" # Disables Security plugin
+      - cluster.name=openarmor-cluster
+      - node.name=openarmor-node1
+      - discovery.seed_hosts=openarmor-node1,openarmor-node2
+      - cluster.initial_cluster_manager_nodes=openarmor-node1,openarmor-node2
+      - bootstrap.memory_lock=true
+      - "OPENSEARCH_JAVA_OPTS=-Xms512m -Xmx512m"
+      - "DISABLE_INSTALL_DEMO_CONFIG=true"
+      - "DISABLE_SECURITY_PLUGIN=true"
     ulimits:
       memlock:
-        soft: -1 # Set memlock to unlimited (no soft or hard limit)
+        soft: -1
         hard: -1
       nofile:
-        soft: 65536 # Maximum number of open files for the openarmor user - set to at least 65536
+        soft: 65536
         hard: 65536
     volumes:
-      - openarmor-data1:/usr/share/opensearch/data # Creates volume called openarmor-data1 and mounts it to the container
+      - openarmor-data1:/usr/share/opensearch/data
     ports:
-      - 9200:9200 # REST API
-      - 9600:9600 # Performance Analyzer
+      - 9200:9200
+      - 9600:9600
     networks:
-      - openarmor-net # All of the containers will join the same Docker bridge network
+      - openarmor-net
   openarmor-node2:
     image: openarmor/openarmor-indexer:latest
     container_name: openarmor-node2
     environment:
-      - cluster.name=openarmor-cluster # Name the cluster
-      - node.name=openarmor-node2 # Name the node that will run in this container
-      - discovery.seed_hosts=openarmor-node1,openarmor-node2 # Nodes to look for when discovering the cluster
-      - cluster.initial_cluster_manager_nodes=openarmor-node1,openarmor-node2 # Nodes eligibile to serve as cluster manager
-      - bootstrap.memory_lock=true # Disable JVM heap memory swapping
-      - "OPENSEARCH_JAVA_OPTS=-Xms512m -Xmx512m" # Set min and max JVM heap sizes to at least 50% of system RAM
-      - "DISABLE_INSTALL_DEMO_CONFIG=true" # Prevents execution of bundled demo script which installs demo certificates and security configurations to openarmor
-      - "DISABLE_SECURITY_PLUGIN=true" # Disables Security plugin
+      - cluster.name=openarmor-cluster
+      - node.name=openarmor-node2
+      - discovery.seed_hosts=openarmor-node1,openarmor-node2
+      - cluster.initial_cluster_manager_nodes=openarmor-node1,openarmor-node2
+      - bootstrap.memory_lock=true
+      - "OPENSEARCH_JAVA_OPTS=-Xms512m -Xmx512m"
+      - "DISABLE_INSTALL_DEMO_CONFIG=true"
+      - "DISABLE_SECURITY_PLUGIN=true"
     ulimits:
       memlock:
-        soft: -1 # Set memlock to unlimited (no soft or hard limit)
+        soft: -1
         hard: -1
       nofile:
-        soft: 65536 # Maximum number of open files for the openarmor user - set to at least 65536
+        soft: 65536
         hard: 65536
     volumes:
-      - openarmor-data2:/usr/share/opensearch/data # Creates volume called openarmor-data2 and mounts it to the container
+      - openarmor-data2:/usr/share/opensearch/data
     networks:
-      - openarmor-net # All of the containers will join the same Docker bridge network
+      - openarmor-net
   openarmor-dashboards:
     image: openarmor/openarmor-dashboards:latest
     container_name: openarmor-dashboards
     ports:
-      - 5601:5601 # Map host port 5601 to container port 5601
+      - 5606:5601
     expose:
-      - "5601" # Expose port 5601 for web access to openarmor Dashboards
+      - "5601"
     environment:
       - 'OPENSEARCH_HOSTS=["http://openarmor-node1:9200","http://openarmor-node2:9200"]'
-      - "DISABLE_SECURITY_DASHBOARDS_PLUGIN=true" # disables security dashboards plugin in openarmor Dashboards
+      - "DISABLE_SECURITY_DASHBOARDS_PLUGIN=true"
+    volumes:
+      - ./openarmor_dashboards.yml:/usr/share/opensearch-dashboards/config/opensearch_dashboards.yml
     networks:
       - openarmor-net
 
