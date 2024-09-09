@@ -50,34 +50,16 @@ services:
       - opensearch-net
 
   opensearch-dashboards:
-    image: opensearchproject/opensearch-dashboards:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
     container_name: opensearch-dashboards
     ports:
       - 5601:5601
     expose:
       - "5601"
-    environment:
-      OPENSEARCH_HOSTS: '["https://opensearch-node1:9200","https://opensearch-node2:9200"]'
-      OPENSEARCH_DASHBOARDS_BRANDING_LOGO_DEFAULT_URL: "https://raw.githubusercontent.com/openarmor/openarmor-branding/main/logo.svg"
-      OPENSEARCH_DASHBOARDS_BRANDING_LOGO_DARK_MODE_URL: "https://raw.githubusercontent.com/openarmor/openarmor-branding/main/logo.svg"
-      OPENSEARCH_DASHBOARDS_BRANDING_MARK_DEFAULT_URL: "https://raw.githubusercontent.com/openarmor/openarmor-branding/main/openarmor_logo.svg"
-      OPENSEARCH_DASHBOARDS_BRANDING_MARK_DARK_MODE_URL: "https://raw.githubusercontent.com/openarmor/openarmor-branding/main/openarmor_logo.svg"
-      OPENSEARCH_DASHBOARDS_BRANDING_LOADING_LOGO_DEFAULT_URL: "https://raw.githubusercontent.com/openarmor/openarmor-branding/main/openarmor_logo.svg"
-      OPENSEARCH_DASHBOARDS_BRANDING_LOADING_LOGO_DARK_MODE_URL: "https://raw.githubusercontent.com/openarmor/openarmor-branding/main/openarmor_logo.svg"
-      OPENSEARCH_DASHBOARDS_BRANDING_FAVICON_URL: "https://raw.githubusercontent.com/openarmor/favicons/main/favicon.ico"
-      OPENSEARCH_DASHBOARDS_BRANDING_APPLICATION_TITLE: "OpenArmor"
-      OPENSEARCH_DASHBOARDS_BRANDING_USE_EXPANDED_HEADER: "true"
     networks:
       - opensearch-net
-    command: >
-      /bin/sh -c "
-        ./bin/opensearch-dashboards-plugin install https://github.com/openarmor/osd-plugins/releases/download/v1.0.0/openarmor.zip &&
-        ./bin/opensearch-dashboards-plugin install https://github.com/openarmor/osd-plugins/releases/download/v1.0.0/openarmorCheckUpdates-4.9.0.zip &&
-        ./bin/opensearch-dashboards-plugin install https://github.com/openarmor/osd-plugins/releases/download/v1.0.0/openarmorCore-4.9.0.zip &&
-        ./bin/opensearch-dashboards-plugin remove securityDashboards &&
-        ./bin/opensearch-dashboards-plugin install https://github.com/openarmor/osd-security-plugin/releases/download/v1.0.0/security-dashboards-2.16.0.0.zip &&
-        /usr/share/opensearch-dashboards/opensearch-dashboards-docker-entrypoint.sh
-      "
 
 volumes:
   opensearch-data1:
