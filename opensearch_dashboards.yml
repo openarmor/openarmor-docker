@@ -1,0 +1,23 @@
+server.host: '0.0.0.0'
+opensearch.hosts: [https://opensearch-node1:9200, https://opensearch-node2:9200]
+opensearch.ssl.verificationMode: none
+opensearch.username: kibanaserver
+opensearch.password: kibanaserver
+opensearch.requestHeadersWhitelist: [authorization, securitytenant]
+opensearch_security.multitenancy.enabled: true
+opensearch_security.multitenancy.tenants.preferred: [Private, Global]
+opensearch_security.readonly_mode.roles: [kibana_read_only]
+opensearch_security.cookie.secure: false
+opensearchDashboards.branding:
+  logo:
+    defaultUrl: 'https://raw.githubusercontent.com/openarmor/openarmor-branding/main/logo.svg'
+    darkModeUrl: 'https://raw.githubusercontent.com/openarmor/openarmor-branding/main/logo.svg'
+  mark:
+    defaultUrl: 'https://raw.githubusercontent.com/openarmor/openarmor-branding/main/openarmor_logo.svg'
+    darkModeUrl: 'https://raw.githubusercontent.com/openarmor/openarmor-branding/main/openarmor_logo.svg'
+  loadingLogo:
+    defaultUrl: 'https://raw.githubusercontent.com/openarmor/openarmor-branding/main/openarmor_logo.svg'
+    darkModeUrl: 'https://raw.githubusercontent.com/openarmor/openarmor-branding/main/openarmor_logo.svg'
+  faviconUrl: 'https://raw.githubusercontent.com/openarmor/favicons/main/favicon.ico'
+  applicationTitle: 'OpenArmor'
+  useExpandedHeader: true
