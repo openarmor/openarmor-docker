@@ -58,12 +58,12 @@ services:
       - "5601"
     environment:
       OPENSEARCH_HOSTS: '["https://opensearch-node1:9200","https://opensearch-node2:9200"]'
-      OPENSEARCH_DASHBOARDS_BRANDING_LOGO_DEFAULT_URL: "https://raw.githubusercontent.com/anubhavg-icpl/openarmor-branding/master/openarmor-logo_white.svg"
-      OPENSEARCH_DASHBOARDS_BRANDING_LOGO_DARK_MODE_URL: "https://raw.githubusercontent.com/anubhavg-icpl/openarmor-branding/master/openarmor-logo.svg"
-      OPENSEARCH_DASHBOARDS_BRANDING_MARK_DEFAULT_URL: "https://raw.githubusercontent.com/anubhavg-icpl/openarmor-branding/master/icon.svg"
-      OPENSEARCH_DASHBOARDS_BRANDING_MARK_DARK_MODE_URL: "https://raw.githubusercontent.com/anubhavg-icpl/openarmor-branding/master/icon.svg"
-      OPENSEARCH_DASHBOARDS_BRANDING_LOADING_LOGO_DEFAULT_URL: "https://raw.githubusercontent.com/anubhavg-icpl/openarmor-branding/master/icon.svg"
-      OPENSEARCH_DASHBOARDS_BRANDING_LOADING_LOGO_DARK_MODE_URL: "https://raw.githubusercontent.com/anubhavg-icpl/openarmor-branding/master/icon.svg"
+      OPENSEARCH_DASHBOARDS_BRANDING_LOGO_DEFAULT_URL: "https://raw.githubusercontent.com/openarmor/openarmor-branding/master/openarmor-logo_white.svg"
+      OPENSEARCH_DASHBOARDS_BRANDING_LOGO_DARK_MODE_URL: "https://raw.githubusercontent.com/openarmor/openarmor-branding/master/openarmor-logo.svg"
+      OPENSEARCH_DASHBOARDS_BRANDING_MARK_DEFAULT_URL: "https://raw.githubusercontent.com/openarmor/openarmor-branding/master/icon.svg"
+      OPENSEARCH_DASHBOARDS_BRANDING_MARK_DARK_MODE_URL: "https://raw.githubusercontent.com/openarmor/openarmor-branding/master/icon.svg"
+      OPENSEARCH_DASHBOARDS_BRANDING_LOADING_LOGO_DEFAULT_URL: "https://raw.githubusercontent.com/openarmor/openarmor-branding/master/icon.svg"
+      OPENSEARCH_DASHBOARDS_BRANDING_LOADING_LOGO_DARK_MODE_URL: "https://raw.githubusercontent.com/openarmor/openarmor-branding/master/icon.svg"
       OPENSEARCH_DASHBOARDS_BRANDING_FAVICON_URL: "https://raw.githubusercontent.com/openarmor/openarmor-brandings/main/favicon.ico"
       OPENSEARCH_DASHBOARDS_BRANDING_APPLICATION_TITLE: "OpenArmor"
       OPENSEARCH_DASHBOARDS_BRANDING_USE_EXPANDED_HEADER: "true"
